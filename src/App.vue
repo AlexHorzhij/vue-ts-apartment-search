@@ -1,26 +1,57 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Welcome to Your Vue.js App" />
+  <HeaderSection>
+    <img src="@/assets/logo.svg" />
+  </HeaderSection>
+  <HomePage :data="data" />
+  <!-- <nav>
+    <router-link to="/">Home</router-link> |
+    <router-link to="/about">About</router-link>
+  </nav>
+  <router-view /> -->
 </template>
 
-<script>
-import HelloWorld from "./components/HelloWorld.vue";
+<script lang="ts">
+import "normalize.css";
+import { defineComponent } from "vue";
+import HeaderSection from "./components/HeaderSection.vue";
+import data from "@/assets/data";
+import HomePage from "./page/HomePage.vue";
 
-export default {
-  name: "App",
+export default defineComponent({
   components: {
-    HelloWorld,
+    HeaderSection,
+    HomePage,
   },
-};
+  setup() {
+    return {
+      data,
+    };
+  },
+});
 </script>
 
 <style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+}
+ul,
+ol {
+  list-style: none;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-left: 0px;
+}
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Montserrat, Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
