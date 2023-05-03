@@ -48,7 +48,6 @@ export default defineComponent({
 
   &__card {
     position: relative;
-    z-index: 100;
     overflow: hidden;
     opacity: 0;
     width: 100%;
@@ -65,15 +64,15 @@ export default defineComponent({
   &__image {
     position: absolute;
     top: 0;
-    /* bottom: 0; */
     left: 0;
-    /* right: 0; */
     object-fit: cover;
   }
   &__description {
     font-size: 16px;
-    line-height: 20px;
+    line-height: 1.25;
     margin-bottom: 20px;
+    height: calc(1em * 1.25 * 4);
+    overflow: hidden;
   }
   &__price {
     font-weight: 700;

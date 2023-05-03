@@ -1,5 +1,5 @@
 <template>
-  <div class="starWrapper">
+  <div class="star-rating">
     <span class="star star__empty" v-for="index in limit" :key="index"></span>
     <div class="star-container" :style="ratingCount">
       <span
@@ -15,7 +15,7 @@
 import { defineComponent, PropType } from "vue";
 
 export default defineComponent({
-  name: "starRating",
+  name: "star-rating",
   props: {
     rating: {
       type: Number as PropType<number>,
@@ -28,7 +28,6 @@ export default defineComponent({
   },
   computed: {
     ratingCount() {
-      console.log("rating: ", this.rating);
       return {
         width: `${this.rating * 20}%`,
       };
@@ -41,7 +40,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.starWrapper {
+.star-rating {
   position: relative;
   display: inline-flex;
   gap: 5px;

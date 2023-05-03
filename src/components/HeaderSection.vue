@@ -1,4 +1,5 @@
 <template>
+  <!-- <Container> -->
   <header class="header">
     <img src="@/assets/logo.svg" />
     <div class="authSec">
@@ -7,9 +8,15 @@
       <a href="">Реестрація</a>
     </div>
   </header>
+  <!-- </Container -->
+  >
 </template>
 
 <script setup lang="ts">
+// import Container from "./reusable/Container.vue";
+// components: {
+//   Container,
+// }
 // import { defineComponent } from "vue";
 </script>
 

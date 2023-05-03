@@ -1,9 +1,12 @@
 {
+  "homepage": "https://AlexHorzhij.github.io/vue-ts-learn",
   "name": "vue-ts-learn",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
@@ -28,6 +31,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "^8.0.3",
+    "gh-pages": "^5.0.0",
     "node-sass": "^8.0.0",
     "prettier": "^2.4.1",
     "sass": "^1.62.1",
