@@ -14,3 +14,8 @@ export interface IApartment {
     email: string;
   };
 }
+
+export interface ISearchQuery {
+  city: string;
+  price: number | null;
+}
