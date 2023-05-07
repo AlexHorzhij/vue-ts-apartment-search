@@ -1,31 +1,25 @@
 <template>
-  <HeaderSection>
-    <img src="@/assets/logo.svg" />
-  </HeaderSection>
-  <HomePage :data="data" />
+  <HeaderSection />
+  <router-view></router-view>
+  <!-- <HomePage :data="data" /> -->
   <!-- <nav>
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link>
   </nav>
   <router-view /> -->
+  <FooterSection />
 </template>
 
 <script lang="ts">
 import "normalize.css";
 import { defineComponent } from "vue";
 import HeaderSection from "./components/HeaderSection.vue";
-import data from "@/assets/data";
-import HomePage from "./page/HomePage.vue";
+import FooterSection from "./components/FooterSection.vue";
 
 export default defineComponent({
   components: {
     HeaderSection,
-    HomePage,
-  },
-  setup() {
-    return {
-      data,
-    };
+    FooterSection,
   },
 });
 </script>

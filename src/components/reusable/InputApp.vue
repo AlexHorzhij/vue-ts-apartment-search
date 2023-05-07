@@ -24,6 +24,6 @@ export default defineComponent({
   height: 44px;
   padding-left: 20px;
   background: $main-background;
-  border: 2px solid $main-color;
+  border: 2px solid $accent-color;
 }
 </style>

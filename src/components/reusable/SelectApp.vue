@@ -11,18 +11,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-// import { IApartment } from "@/types/data";
+import { defineComponent, PropType } from "vue";
 
 export default defineComponent({
   name: "select-app",
   props: {
-    // data: {
-    //   type: Array as PropType<IApartment[]>,
-    //   required: true,
-    // },
     SelectorList: {
-      type: Array,
+      type: Array as PropType<string[]>,
       required: true,
     },
   },
@@ -39,6 +34,6 @@ export default defineComponent({
   height: 44px;
   padding-left: 20px;
   background: $main-background;
-  border: 2px solid $main-color;
+  border: 2px solid $accent-color;
 }
 </style>

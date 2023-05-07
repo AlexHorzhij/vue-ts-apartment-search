@@ -1,22 +1,24 @@
 <template>
-  <div class="apartment">
-    <img class="apartment__image" :src="imgUrl" />
-    <div class="apartment__card visible">
-      <p class="apartment__description">{{ description }}</p>
-      <StarRaiting :rating="rating" />
-      <p class="apartment__price">UAH {{ price }} per night</p>
+  <router-link :to="{ name: 'apartment', params: { id } }">
+    <div class="apartment">
+      <img class="apartment__image" :src="imgUrl" />
+      <div class="apartment__card visible">
+        <p class="apartment__description">{{ description }}</p>
+        <StarRating :rating="rating" />
+        <p class="apartment__price">UAH {{ price }} per night</p>
+      </div>
     </div>
-  </div>
+  </router-link>
 </template>
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
-import StarRaiting from "@/components/reusable/StarRaiting.vue";
+import StarRating from "@/components/reusable/StarRating.vue";
 
 export default defineComponent({
   name: "ApartmentCard",
   components: {
-    StarRaiting,
+    StarRating,
   },
   props: {
     imgUrl: {
@@ -33,6 +35,10 @@ export default defineComponent({
     },
     price: {
       type: Number as PropType<number>,
+      required: true,
+    },
+    id: {
+      type: String as PropType<string>,
       required: true,
     },
   },

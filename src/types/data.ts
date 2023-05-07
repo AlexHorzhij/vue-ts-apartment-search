@@ -19,3 +19,10 @@ export interface ISearchQuery {
   city: string;
   price: number | null;
 }
+
+export interface IFeedback {
+  name: string;
+  rating: number;
+  text: string;
+  id: string;
+}

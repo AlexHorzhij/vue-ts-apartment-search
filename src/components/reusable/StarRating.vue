@@ -15,7 +15,7 @@
 import { defineComponent, PropType } from "vue";
 
 export default defineComponent({
-  name: "star-rating",
+  name: "StarRating",
   props: {
     rating: {
       type: Number as PropType<number>,
@@ -44,6 +44,7 @@ export default defineComponent({
   position: relative;
   display: inline-flex;
   gap: 5px;
+  padding: 0 2.5px;
 }
 
 .star {
@@ -57,6 +58,7 @@ export default defineComponent({
     position: absolute;
     display: inline-flex;
     gap: 5px;
+    padding: 0 2.5px;
     height: 100%;
     width: 0;
     top: 0;

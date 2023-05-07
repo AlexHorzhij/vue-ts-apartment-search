@@ -41,7 +41,17 @@ export default defineComponent({
     return {
       price: null,
       city: "",
-      SelectorList: ["Dnipro", "Poltava", "Kharkiv"],
+      SelectorList: [
+        "Dnipro",
+        "Poltava",
+        "Kharkiv",
+        "Mariupol",
+        "Odesa",
+        "Kyiv",
+        "Kherson",
+        "Chasity",
+        "Lviv",
+      ],
     };
   },
 });

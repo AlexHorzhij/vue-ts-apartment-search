@@ -16,7 +16,7 @@ export default defineComponent({});
 .btn {
   height: 44px;
   padding: 0 34px;
-  background-color: $main-color;
+  background-color: $accent-color;
   color: $main-background;
   border: 1px solid transparent;
   transition: scale 300ms linear;
