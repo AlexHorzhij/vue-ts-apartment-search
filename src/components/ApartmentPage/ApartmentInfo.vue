@@ -8,7 +8,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import ApartmentOwner from "./ApartmentOwner.vue";
-import ApartmentFeedback from "./ApartmentFeedback.vue";
+import ApartmentFeedback from "@/components/feedbacks/ApartmentFeedback.vue";
 
 export default defineComponent({
   name: "ApartmentInfo",

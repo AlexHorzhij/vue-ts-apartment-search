@@ -12,8 +12,8 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
-import StarRating from "../reusable/StarRating.vue";
-import ButtonApp from "../reusable/ButtonApp.vue";
+import StarRating from "@/components/reusable/StarRating.vue";
+import ButtonApp from "@/components/reusable/ButtonApp.vue";
 
 export default defineComponent({
   name: "ApartmentDescription",

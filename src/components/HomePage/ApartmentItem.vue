@@ -16,7 +16,7 @@ import { defineComponent, PropType } from "vue";
 import StarRating from "@/components/reusable/StarRating.vue";
 
 export default defineComponent({
-  name: "ApartmentCard",
+  name: "ApartmentItem",
   components: {
     StarRating,
   },

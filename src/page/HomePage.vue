@@ -3,8 +3,8 @@
     <main class="main">
       <ApartmentFindForm @apartmentSearch="findApartment" />
       <h2 class="title">Подборка согласно выбора</h2>
-      <ApartmentList>
-        <ApartmentCard
+      <ApartmentItemList>
+        <ApartmentItem
           v-for="{ descr, price, rating, imgUrl, id } in filteredApartmentList"
           :description="descr"
           :price="price"
@@ -13,7 +13,7 @@
           :key="id"
           :id="id"
         />
-      </ApartmentList>
+      </ApartmentItemList>
     </main>
   </Container>
 </template>
@@ -22,15 +22,15 @@
 import { defineComponent } from "vue";
 import { IApartment, ISearchQuery } from "@/types/data";
 import Container from "@/components/reusable/Container.vue";
-import ApartmentList from "@/components/apartments/ApartmentList.vue";
-import ApartmentCard from "@/components/apartments/ApartmentCard.vue";
-import ApartmentFindForm from "@/components/apartments/ApartmentFindForm.vue";
+import ApartmentItemList from "@/components/HomePage/ApartmentItemList.vue";
+import ApartmentItem from "@/components/HomePage/ApartmentItem.vue";
+import ApartmentFindForm from "@/components/HomePage/ApartmentFindForm.vue";
 import data from "@/assets/data";
 
 export default defineComponent({
   components: {
-    ApartmentList,
-    ApartmentCard,
+    ApartmentItemList,
+    ApartmentItem,
     ApartmentFindForm,
     Container,
   },

@@ -25,27 +25,14 @@ export default defineComponent({
 </script>
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  text-decoration: none;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-}
-ul,
-ol {
-  list-style: none;
-  margin-top: 0px;
-  margin-bottom: 0px;
-  padding-left: 0px;
-}
 #app {
   font-family: Montserrat, Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 </style>

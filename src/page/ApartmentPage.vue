@@ -15,9 +15,9 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import ApartmentDescription from "@/components/apartments/ApartmentDescription.vue";
+import ApartmentDescription from "@/components/ApartmentPage/ApartmentDescription.vue";
 import Container from "@/components/reusable/Container.vue";
-import ApartmentInfo from "@/components/apartments/ApartmentInfo.vue";
+import ApartmentInfo from "@/components/ApartmentPage/ApartmentInfo.vue";
 import { IApartment } from "@/types/data";
 import data from "@/assets/data";
 
@@ -35,6 +35,7 @@ export default defineComponent({
 <style scoped>
 .main {
   padding-top: 120px;
+  flex-grow: 1;
 }
 .apartment-page__container {
   display: flex;

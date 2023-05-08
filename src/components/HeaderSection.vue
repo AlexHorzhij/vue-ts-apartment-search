@@ -2,7 +2,9 @@
   <header class="header">
     <Container>
       <div class="header__content">
-        <Logo />
+        <router-link :to="{ name: 'homepage' }">
+          <Logo />
+        </router-link>
         <div class="authSec">
           <a href="">Вхід</a>
           <span class="divider"> / </span>

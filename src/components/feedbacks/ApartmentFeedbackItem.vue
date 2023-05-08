@@ -43,7 +43,8 @@ export default defineComponent({
   width: 100%;
   height: 200px;
   padding: 20px;
-  border: 1px solid $secondary-background;
+  border: 2px solid $secondary-background;
+  border-top: none;
 
   &__head {
     display: flex;
