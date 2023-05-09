@@ -26,6 +26,7 @@ import ApartmentItemList from "@/components/HomePage/ApartmentItemList.vue";
 import ApartmentItem from "@/components/HomePage/ApartmentItem.vue";
 import ApartmentFindForm from "@/components/HomePage/ApartmentFindForm.vue";
 import data from "@/assets/data";
+import { getApartmentsList } from "@/api/apartment";
 
 export default defineComponent({
   components: {
@@ -54,6 +55,10 @@ export default defineComponent({
         price: null,
       } as ISearchQuery,
     };
+  },
+  mounted() {
+    console.log(process.env.API_KEY);
+    getApartmentsList();
   },
   methods: {
     findApartment(data: ISearchQuery): void {
