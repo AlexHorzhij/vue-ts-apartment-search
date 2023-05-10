@@ -6,9 +6,13 @@
           <Logo />
         </router-link>
         <div class="authSec">
-          <a href="">Вхід</a>
+          <router-link :to="{ name: 'login' }">
+            <p>Вхід</p>
+          </router-link>
           <span class="divider"> / </span>
-          <a href="">Реестрація</a>
+          <router-link :to="{ name: 'registration' }">
+            <p>Реестрація</p>
+          </router-link>
         </div>
       </div>
     </Container>
