@@ -10,7 +10,7 @@
         <InputApp placeholder="Password" v-model:value="formData.password" />
         <InputApp
           placeholder="Confirm password"
-          v-model:value="formData.confirmPassword"
+          v-model:value="confirmPassword"
         />
       </div>
       <ButtonApp type="submit">Sign up</ButtonApp>
@@ -22,6 +22,7 @@
 import { defineComponent } from "vue";
 import InputApp from "@/components/reusable/InputApp.vue";
 import ButtonApp from "@/components/reusable/ButtonApp.vue";
+import API from "@/api/auth";
 
 export default defineComponent({
   name: "RegistrationPage",
@@ -35,13 +36,13 @@ export default defineComponent({
         name: "",
         email: "",
         password: "",
-        confirmPassword: "",
       },
+      confirmPassword: "",
     };
   },
   methods: {
     signUp() {
-      console.log("this.formData.name", this.formData);
+      API.registrationUser(this.formData);
     },
   },
   setup() {

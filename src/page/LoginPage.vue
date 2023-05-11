@@ -1,14 +1,24 @@
 <template>
   <main class="registration">
     <!-- <div class="overlay"></div> -->
-    <form class="registration__form" @submit.prevent="signIn">
+    <Form class="registration__form" @submit.prevent="signIn">
       <h1 class="title">Sign in</h1>
       <div class="form__inputs">
-        <InputApp placeholder="Email" v-model:value="formData.email" />
-        <InputApp placeholder="Password" v-model:value="formData.password" />
+        <InputApp
+          placeholder="Email"
+          v-model:value="formData.email"
+          message="Enter your email"
+          :isNotValid="true"
+        />
+        <InputApp
+          placeholder="Password"
+          v-model:value="formData.password"
+          message="ffffffffff"
+          :isNotValid="false"
+        />
       </div>
       <ButtonApp type="submit">Sign up</ButtonApp>
-    </form>
+    </Form>
   </main>
 </template>
 
@@ -16,12 +26,15 @@
 import { defineComponent } from "vue";
 import InputApp from "@/components/reusable/InputApp.vue";
 import ButtonApp from "@/components/reusable/ButtonApp.vue";
+import Form from "@/components/form/index.vue";
+import API from "@/api/auth";
 
 export default defineComponent({
   name: "RegistrationPage",
   components: {
     InputApp,
     ButtonApp,
+    Form,
   },
   data() {
     return {
@@ -33,7 +46,7 @@ export default defineComponent({
   },
   methods: {
     signIn() {
-      console.log("this.formData.name", this.formData);
+      API.loginUser(this.formData.email, this.formData.password);
     },
   },
   setup() {
@@ -43,6 +56,7 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
+@import "@/assets/scss/variables.scss";
 .registration {
   position: relative;
   display: flex;
@@ -57,7 +71,7 @@ export default defineComponent({
 
   &__form {
     padding: 40px 30px;
-    background-color: white;
+    background-color: $main-background;
     width: 410px;
     z-index: 100;
   }

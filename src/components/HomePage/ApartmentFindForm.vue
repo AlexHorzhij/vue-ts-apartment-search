@@ -6,9 +6,12 @@
       v-model="city"
     />
     <InputApp
+      type="number"
       class="form__input"
       v-model:value="price"
+      messageError="Pleas enter correct value"
       placeholder="Price, from:"
+      :validationRules="rules"
     />
     <ButtonApp type="submit">Find apartment</ButtonApp>
   </form>
@@ -20,6 +23,7 @@ import { ISearchQuery } from "@/types/data";
 import InputApp from "@/components/reusable/InputApp.vue";
 import SelectApp from "@/components/reusable/SelectApp.vue";
 import ButtonApp from "@/components/reusable/ButtonApp.vue";
+import { notEmpty, symbolsLimit } from "@/utils/validationRules";
 
 export default defineComponent({
   name: "ApartmentFindForm",
@@ -39,6 +43,7 @@ export default defineComponent({
   },
   data() {
     return {
+      rules: [notEmpty, symbolsLimit(10)],
       price: null,
       city: "",
       SelectorList: [

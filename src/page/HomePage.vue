@@ -14,6 +14,7 @@
           :id="id"
         />
       </ApartmentItemList>
+      <p v-if="nothingFound" class="foundNotification">Nothing found</p>
     </main>
   </Container>
 </template>
@@ -35,12 +36,6 @@ export default defineComponent({
     ApartmentFindForm,
     Container,
   },
-  // props: {
-  //   data: {
-  //     type: Array as PropType<IApartment[]>,
-  //     default: () => [],
-  //   },
-  // },
   setup() {
     return {
       data: data as IApartment[],
@@ -49,7 +44,6 @@ export default defineComponent({
 
   data() {
     return {
-      //   data: data as IApartment[],
       filterParams: {
         city: "",
         price: null,
@@ -57,7 +51,7 @@ export default defineComponent({
     };
   },
   mounted() {
-    console.log(process.env.API_KEY);
+    console.log("process.env.API_KEY", process.env.API_KEY);
     getApartmentsList();
   },
   methods: {
@@ -76,6 +70,9 @@ export default defineComponent({
     },
   },
   computed: {
+    nothingFound(): boolean {
+      return this.filteredApartmentList.length === 0;
+    },
     filteredApartmentList(): IApartment[] | [] {
       if (this.data.length === 0) return [];
       else {
@@ -99,5 +96,9 @@ export default defineComponent({
   font-weight: 700;
   font-size: 20px;
   line-height: 24px;
+}
+.foundNotification {
+  font-size: 22px;
+  margin-bottom: 30px;
 }
 </style>

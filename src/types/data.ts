@@ -26,3 +26,8 @@ export interface IFeedback {
   text: string;
   id: string;
 }
+
+export interface IValid {
+  message: string;
+  result: boolean;
+}
