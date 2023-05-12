@@ -33,6 +33,9 @@ export default defineComponent({
       }, true);
       return isFormValid;
     },
+    reset() {
+      this.inputs.map(item => (item.value = ""));
+    },
   },
 });
 </script>

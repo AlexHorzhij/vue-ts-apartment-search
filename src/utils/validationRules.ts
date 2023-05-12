@@ -19,14 +19,21 @@ export const symbolsMinLimit =
     result: val.length >= limit,
   });
 
-export const emailValidation = (val: string) => ({
+export const emailValidation = (val: string): IValid => ({
   message: "Wrong email",
   result: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(val),
 });
 
-export const passwordValidation = (val: string) => ({
+export const passwordValidation = (val: string): IValid => ({
   message: "Password must contain 1 number and 1 symbol",
   result: /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/.test(val),
 });
 
 //   result: /^(?=.*[A-Za-z])(?=.*[\d])[a-zA-Z0-9]{7,256}$/.test(val),
+
+export const passwordConfirmValidation =
+  (val1: string) =>
+  (val2: string): IValid => ({
+    message: "Passwords don't match",
+    result: val1 === val2,
+  });

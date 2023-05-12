@@ -1,52 +1,18 @@
 <template>
   <main class="registration">
     <div class="overlay"></div>
-
-    <form class="registration__form" @submit.prevent="signUp">
-      <h1 class="title">Sign up</h1>
-      <div class="form__inputs">
-        <InputApp placeholder="Name" v-model:value="formData.name" />
-        <InputApp placeholder="Email" v-model:value="formData.email" />
-        <InputApp placeholder="Password" v-model:value="formData.password" />
-        <InputApp
-          placeholder="Confirm password"
-          v-model:value="confirmPassword"
-        />
-      </div>
-      <ButtonApp type="submit">Sign up</ButtonApp>
-    </form>
+    <RegistrationForm />
   </main>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import InputApp from "@/components/reusable/InputApp.vue";
-import ButtonApp from "@/components/reusable/ButtonApp.vue";
-import API from "@/api/auth";
+import RegistrationForm from "@/components/Registration/RegistrationForm.vue";
 
 export default defineComponent({
   name: "RegistrationPage",
   components: {
-    InputApp,
-    ButtonApp,
-  },
-  data() {
-    return {
-      formData: {
-        name: "",
-        email: "",
-        password: "",
-      },
-      confirmPassword: "",
-    };
-  },
-  methods: {
-    signUp() {
-      API.registrationUser(this.formData);
-    },
-  },
-  setup() {
-    return {};
+    RegistrationForm,
   },
 });
 </script>
