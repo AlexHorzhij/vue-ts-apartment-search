@@ -1,8 +1,8 @@
 <template>
   <main class="registration">
     <!-- <div class="overlay"></div> -->
-    <Form class="registration__form" @submit.prevent="signIn">
-      <h1 class="title">Sign in</h1>
+    <LoginForm class="registration__form" />
+    <!-- <h1 class="title">Sign in</h1>
       <div class="form__inputs">
         <InputApp
           placeholder="Email"
@@ -17,41 +17,25 @@
           :isNotValid="false"
         />
       </div>
-      <ButtonApp type="submit">Sign up</ButtonApp>
-    </Form>
+      <ButtonApp type="submit">Sign up</ButtonApp> -->
   </main>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import InputApp from "@/components/reusable/InputApp.vue";
-import ButtonApp from "@/components/reusable/ButtonApp.vue";
-import Form from "@/components/form/index.vue";
-import API from "@/api/auth";
+import LoginForm from "@/components/Login/LoginForm.vue";
 
 export default defineComponent({
   name: "RegistrationPage",
   components: {
-    InputApp,
-    ButtonApp,
-    Form,
+    LoginForm,
   },
-  data() {
-    return {
-      formData: {
-        email: "",
-        password: "",
-      },
-    };
-  },
-  methods: {
-    signIn() {
-      API.loginUser(this.formData.email, this.formData.password);
-    },
-  },
-  setup() {
-    return {};
-  },
+
+  // methods: {
+  //   signIn() {
+  //     // API.loginUser(this.formData.email, this.formData.password);
+  //   },
+  // },
 });
 </script>
 
@@ -86,18 +70,5 @@ export default defineComponent({
   background: #0f1d2d;
   mix-blend-mode: darken;
   opacity: 0.4;
-}
-
-.form__inputs {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  margin-bottom: 40px;
-}
-
-.title {
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 1.2;
 }
 </style>

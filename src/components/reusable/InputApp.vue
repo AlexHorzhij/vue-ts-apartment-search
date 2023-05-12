@@ -15,8 +15,9 @@ import { defineComponent, PropType } from "vue";
 import { IValid } from "@/types/data";
 
 export default defineComponent({
-  name: "input-app",
+  name: "InputApp",
   inject: ["form"],
+  inheritAttrs: false,
   data() {
     return {
       isValid: true,
@@ -38,26 +39,32 @@ export default defineComponent({
     },
   },
   watch: {
-    value(value): void {
-      this.validate(value);
+    value(): void {
+      this.validate();
     },
   },
   methods: {
-    validate(value: string): void {
+    validate(): boolean {
       this.isValid = this.validationRules.every(rule => {
-        const { result, message } = rule(value);
+        const { result, message } = rule(this.value);
         if (!result) {
           this.error = message || this.messageError;
         }
         return result;
       });
+      return this.isValid;
     },
   },
-  // mounted() {
-  //   // eslint-disable-next-line
-  //   const form: any = this.form;
-  //   form?.registerInput(this);
-  // },
+  mounted() {
+    // eslint-disable-next-line
+    const form: any = this.form;
+    form?.registerInput(this);
+  },
+  unmounted() {
+    // eslint-disable-next-line
+    const form: any = this.form;
+    form?.unRegisterInput(this);
+  },
 });
 </script>
 

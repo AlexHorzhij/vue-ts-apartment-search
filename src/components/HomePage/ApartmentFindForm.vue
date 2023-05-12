@@ -1,5 +1,5 @@
 <template>
-  <form class="form" @submit.prevent="submitForm">
+  <FormApp class="form" @submit.prevent="submitForm">
     <SelectApp
       class="form__selector"
       :SelectorList="SelectorList"
@@ -14,7 +14,7 @@
       :validationRules="rules"
     />
     <ButtonApp type="submit">Find apartment</ButtonApp>
-  </form>
+  </FormApp>
 </template>
 
 <script lang="ts">
@@ -24,6 +24,7 @@ import InputApp from "@/components/reusable/InputApp.vue";
 import SelectApp from "@/components/reusable/SelectApp.vue";
 import ButtonApp from "@/components/reusable/ButtonApp.vue";
 import { notEmpty, symbolsLimit } from "@/utils/validationRules";
+import FormApp from "@/components/form/index.vue";
 
 export default defineComponent({
   name: "ApartmentFindForm",
@@ -31,6 +32,7 @@ export default defineComponent({
     InputApp,
     SelectApp,
     ButtonApp,
+    FormApp,
   },
   methods: {
     submitForm() {
@@ -65,6 +67,7 @@ export default defineComponent({
 <style scoped lang="scss">
 .form {
   display: flex;
+  width: 100%;
   padding: 60px 0 39px 0;
 
   &__selector {

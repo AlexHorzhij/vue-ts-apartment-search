@@ -1,34 +1,38 @@
 <template>
-  <form class="form">
+  <form class="form" v-bind="$attrs">
     <slot></slot>
   </form>
 </template>
 
 <script lang="ts">
-import { VueElement, defineComponent } from "vue";
+import { defineComponent } from "vue";
+import Input from "@/components/reusable/InputApp.vue";
 
 export default defineComponent({
   name: "FormApp",
+  inheritAttrs: false,
   provide() {
-    return {
-      form: this,
-    };
+    return { form: this };
   },
   data() {
     return {
-      inputs: [] as VueElement[],
+      inputs: [] as (typeof Input)[],
     };
   },
   methods: {
-    registerInput(input: VueElement): void {
+    registerInput(input: typeof Input): void {
       this.inputs.push(input);
     },
-    unRegisterInput(input: VueElement): void {
+    unRegisterInput(input: typeof Input): void {
       this.inputs.filter(item => item !== input);
     },
-  },
-  mounted() {
-    console.log("this.form1", typeof this); // injected value
+    validate() {
+      const isFormValid = this.inputs.reduce((valid, input) => {
+        const isInputValid = input.validate();
+        return valid && isInputValid;
+      }, true);
+      return isFormValid;
+    },
   },
 });
 </script>
