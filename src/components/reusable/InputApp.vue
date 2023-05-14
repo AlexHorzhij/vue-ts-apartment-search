@@ -11,19 +11,21 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import { defineComponent, inject, PropType } from "vue";
 import { IValid } from "@/types/data";
 
 export default defineComponent({
   name: "InputApp",
-  inject: ["form"],
   inheritAttrs: false,
   data() {
+    const form: HTMLFormElement | undefined = inject("form");
     return {
       isValid: true,
       error: "",
+      form,
     };
   },
+
   props: {
     value: {
       type: String as PropType<string>,
@@ -56,14 +58,14 @@ export default defineComponent({
     },
   },
   mounted() {
-    // eslint-disable-next-line
-    const form: any = this.form;
-    form?.registerInput(this);
+    if (this.form) {
+      this.form.registerInput(this);
+    }
   },
   unmounted() {
-    // eslint-disable-next-line
-    const form: any = this.form;
-    form?.unRegisterInput(this);
+    if (this.form) {
+      this.form.unRegisterInput(this);
+    }
   },
 });
 </script>

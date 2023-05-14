@@ -1,6 +1,6 @@
 <template>
   <Form ref="form" @submit.prevent="signIn">
-    <h1 class="title">Sign in</h1>
+    <AuthTitle>Login</AuthTitle>
     <div class="form__inputs">
       <InputApp
         placeholder="Email"
@@ -30,11 +30,12 @@ import {
 import InputApp from "@/components/reusable/InputApp.vue";
 import ButtonApp from "@/components/reusable/ButtonApp.vue";
 import Form from "@/components/form/index.vue";
+import AuthTitle from "@/components/auth/AuthTitle.vue";
 import API from "@/api/auth";
 
 export default defineComponent({
   name: "LoginForm",
-  components: { InputApp, ButtonApp, Form },
+  components: { InputApp, ButtonApp, Form, AuthTitle },
   setup() {
     const form = ref<HTMLFormElement | null>(null);
     return {
@@ -71,17 +72,11 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .form__inputs {
   display: flex;
   flex-direction: column;
   gap: 20px;
   margin-bottom: 40px;
-}
-
-.title {
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 1.2;
 }
 </style>

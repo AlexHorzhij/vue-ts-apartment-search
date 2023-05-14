@@ -31,3 +31,9 @@ export interface IValid {
   message: string;
   result: boolean;
 }
+
+export interface IFormData {
+  name: string;
+  email: string;
+  password: string;
+}

@@ -1,6 +1,6 @@
 <template>
   <Form ref="form" @submit.prevent="signUp">
-    <h1 class="title">Sign up</h1>
+    <AuthTitle level="4">Registration</AuthTitle>
 
     <div class="form__inputs">
       <InputApp
@@ -30,6 +30,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
+import { IFormData } from "@/types/data";
 import {
   passwordConfirmValidation,
   passwordValidation,
@@ -40,6 +41,7 @@ import {
 import Form from "@/components/form/index.vue";
 import InputApp from "@/components/reusable/InputApp.vue";
 import ButtonApp from "@/components/reusable/ButtonApp.vue";
+import AuthTitle from "@/components/auth/AuthTitle.vue";
 import API from "@/api/auth";
 
 export default defineComponent({
@@ -48,6 +50,7 @@ export default defineComponent({
     InputApp,
     ButtonApp,
     Form,
+    AuthTitle,
   },
   setup() {
     const form = ref<HTMLFormElement | null>(null);
@@ -61,7 +64,7 @@ export default defineComponent({
         name: "",
         email: "",
         password: "",
-      },
+      } as IFormData,
       confirmPassword: "",
     };
   },
@@ -69,7 +72,8 @@ export default defineComponent({
     signUp() {
       if (this.form !== null) {
         const isFormValid = this.form.validate();
-        if (isFormValid) {
+        const confirm = this.formData.password === this.confirmPassword;
+        if (isFormValid && confirm) {
           API.registrationUser(this.formData);
           this.form.reset();
         }
@@ -88,7 +92,8 @@ export default defineComponent({
     },
     confirmPasswordRules() {
       const { password } = this.formData;
-      return [notEmpty, passwordConfirmValidation(password)];
+      const confirmValidation = passwordConfirmValidation(password);
+      return [notEmpty, confirmValidation];
     },
   },
 });

@@ -13,7 +13,7 @@
       placeholder="Price, from:"
       :validationRules="rules"
     />
-    <ButtonApp type="submit">Find apartment</ButtonApp>
+    <ButtonApp type="submit" class="form__btn">Find apartment</ButtonApp>
   </FormApp>
 </template>
 
@@ -76,7 +76,9 @@ export default defineComponent({
   }
   &__input {
     width: 220px;
-    margin-right: auto;
+  }
+  &__btn {
+    margin-left: auto;
   }
 }
 </style>

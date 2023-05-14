@@ -1,63 +1,23 @@
 <template>
-  <main class="registration">
-    <div class="overlay"></div>
-    <RegistrationForm />
-  </main>
+  <MainApp>
+    <AuthPage>
+      <RegistrationForm />
+    </AuthPage>
+  </MainApp>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import RegistrationForm from "@/components/Registration/RegistrationForm.vue";
+import MainApp from "@/components/reusable/MainApp.vue";
+import AuthPage from "@/components/auth/AuthPage.vue";
+import RegistrationForm from "@/components/auth/Registration/RegistrationForm.vue";
 
 export default defineComponent({
   name: "RegistrationPage",
   components: {
     RegistrationForm,
+    MainApp,
+    AuthPage,
   },
 });
 </script>
-
-<style scoped lang="scss">
-.registration {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-top: 120px;
-  width: 100%;
-  flex-grow: 1;
-  background-image: url(@/../public/img/login-background.jpg);
-  background-size: cover;
-  background-repeat: no-repeat;
-
-  &__form {
-    padding: 40px 30px;
-    background-color: white;
-    width: 410px;
-    z-index: 100;
-  }
-}
-
-.overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #0f1d2d;
-  mix-blend-mode: darken;
-  opacity: 0.4;
-}
-
-.form__inputs {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  margin-bottom: 60px;
-}
-
-.title {
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 1.2;
-}
-</style>

@@ -1,6 +1,6 @@
 <template>
-  <Container>
-    <main class="main">
+  <MainApp class="main">
+    <Container>
       <ApartmentFindForm @apartmentSearch="findApartment" />
       <h2 class="title">Подборка согласно выбора</h2>
       <ApartmentItemList>
@@ -15,13 +15,14 @@
         />
       </ApartmentItemList>
       <p v-if="nothingFound" class="foundNotification">Nothing found</p>
-    </main>
-  </Container>
+    </Container>
+  </MainApp>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import { IApartment, ISearchQuery } from "@/types/data";
+import MainApp from "@/components/reusable/MainApp.vue";
 import Container from "@/components/reusable/Container.vue";
 import ApartmentItemList from "@/components/HomePage/ApartmentItemList.vue";
 import ApartmentItem from "@/components/HomePage/ApartmentItem.vue";
@@ -35,6 +36,7 @@ export default defineComponent({
     ApartmentItem,
     ApartmentFindForm,
     Container,
+    MainApp,
   },
   setup() {
     return {
