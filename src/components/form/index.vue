@@ -34,7 +34,14 @@ export default defineComponent({
       return isFormValid;
     },
     reset() {
-      this.inputs.map(item => (item.value = ""));
+      this.inputs.forEach(input => {
+        input.reset();
+      });
+    },
+    submitForm() {
+      this.inputs.forEach(input => {
+        input.blurHandler();
+      });
     },
   },
 });

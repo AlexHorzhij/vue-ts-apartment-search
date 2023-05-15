@@ -31,7 +31,6 @@ import InputApp from "@/components/reusable/InputApp.vue";
 import ButtonApp from "@/components/reusable/ButtonApp.vue";
 import Form from "@/components/form/index.vue";
 import AuthTitle from "@/components/auth/AuthTitle.vue";
-import API from "@/api/auth";
 
 export default defineComponent({
   name: "LoginForm",
@@ -62,9 +61,11 @@ export default defineComponent({
   methods: {
     signIn() {
       if (this.form !== null) {
+        this.form.submitForm();
         const isFormValid = this.form.validate();
         if (isFormValid) {
-          API.loginUser(this.formData.email, this.formData.password);
+          this.$store.dispatch("login", this.formData);
+          this.form.reset();
         }
       }
     },

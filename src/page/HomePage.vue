@@ -3,6 +3,7 @@
     <Container>
       <ApartmentFindForm @apartmentSearch="findApartment" />
       <h2 class="title">Подборка согласно выбора</h2>
+      <p>{{}}</p>
       <ApartmentItemList>
         <ApartmentItem
           v-for="{ descr, price, rating, imgUrl, id } in filteredApartmentList"
@@ -27,8 +28,9 @@ import Container from "@/components/reusable/Container.vue";
 import ApartmentItemList from "@/components/HomePage/ApartmentItemList.vue";
 import ApartmentItem from "@/components/HomePage/ApartmentItem.vue";
 import ApartmentFindForm from "@/components/HomePage/ApartmentFindForm.vue";
-import data from "@/assets/data";
 import { getApartmentsList } from "@/api/apartment";
+// import { useStore } from "@/store/index";
+import data from "@/assets/data";
 
 export default defineComponent({
   components: {
@@ -39,6 +41,8 @@ export default defineComponent({
     MainApp,
   },
   setup() {
+    // const store = useStore();
+    // console.log("store: ", store);
     return {
       data: data as IApartment[],
     };
@@ -53,6 +57,8 @@ export default defineComponent({
     };
   },
   mounted() {
+    console.log(this.$store);
+
     console.log("process.env.API_KEY", process.env.API_KEY);
     getApartmentsList();
   },

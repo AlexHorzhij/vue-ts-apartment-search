@@ -2,11 +2,15 @@
   <div class="inputWrapper">
     <input
       v-bind="$attrs"
+      :value="value"
+      @blur="blurHandler"
       class="input"
-      :class="!isValid && 'error'"
+      :class="!isValid && !isFirstInput && 'error'"
       @input="$emit('update:value', $event.target.value)"
     />
-    <span v-if="!isValid" class="message-error">{{ error }}</span>
+    <span v-if="!isValid && !isFirstInput" class="message-error">{{
+      error
+    }}</span>
   </div>
 </template>
 
@@ -20,12 +24,12 @@ export default defineComponent({
   data() {
     const form: HTMLFormElement | undefined = inject("form");
     return {
+      isFirstInput: true,
       isValid: true,
       error: "",
       form,
     };
   },
-
   props: {
     value: {
       type: String as PropType<string>,
@@ -42,10 +46,17 @@ export default defineComponent({
   },
   watch: {
     value(): void {
+      if (this.isFirstInput) return;
       this.validate();
     },
   },
   methods: {
+    blurHandler(): void {
+      if (this.isFirstInput) {
+        this.validate();
+      }
+      this.isFirstInput = false;
+    },
     validate(): boolean {
       this.isValid = this.validationRules.every(rule => {
         const { result, message } = rule(this.value);
@@ -55,6 +66,11 @@ export default defineComponent({
         return result;
       });
       return this.isValid;
+    },
+    reset() {
+      this.$emit("update:value", "");
+      this.isFirstInput = true;
+      this.isValid = true;
     },
   },
   mounted() {

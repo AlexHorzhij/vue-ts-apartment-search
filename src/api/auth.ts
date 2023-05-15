@@ -5,6 +5,8 @@ import {
   signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
+// import { store } from "@/store/index";
+// import {IResponse} from '@/types/data'
 
 export const auth = getAuth(app);
 
@@ -12,6 +14,16 @@ interface ISingUp {
   email: string;
   password: string;
   name: string;
+}
+interface ISingIn {
+  email: string;
+  password: string;
+}
+
+interface IResponse {
+  userName: string | null;
+  email: string | null;
+  uid: string | null;
 }
 
 export default {
@@ -24,18 +36,29 @@ export default {
           displayName: name,
         });
       }
-      const data = await auth.currentUser;
-      console.log("data: ", data);
+      const response = auth.currentUser;
+      if (response) {
+        const data: IResponse = {
+          userName: response.displayName,
+          email: response.email,
+          uid: response.uid,
+        };
+        return data;
+      }
+      return null;
     } catch (error) {
-      // const errorCode = error.code;
-      // const errorMessage = error.message;
       console.log("error: ", error);
     }
   },
-  async loginUser(email: string, password: string) {
+  async loginUser({ email, password }: ISingIn) {
     try {
       const { user } = await signInWithEmailAndPassword(auth, email, password);
-      console.log("user: ", user);
+      const data = {
+        userName: user.displayName,
+        email: user.email,
+        uid: user.uid,
+      };
+      return data;
     } catch (error) {
       console.log("error: ", error);
     }

@@ -1,6 +1,6 @@
 <template>
   <Form ref="form" @submit.prevent="signUp">
-    <AuthTitle level="4">Registration</AuthTitle>
+    <AuthTitle>Registration</AuthTitle>
 
     <div class="form__inputs">
       <InputApp
@@ -42,7 +42,6 @@ import Form from "@/components/form/index.vue";
 import InputApp from "@/components/reusable/InputApp.vue";
 import ButtonApp from "@/components/reusable/ButtonApp.vue";
 import AuthTitle from "@/components/auth/AuthTitle.vue";
-import API from "@/api/auth";
 
 export default defineComponent({
   name: "RegistrationForm",
@@ -69,13 +68,23 @@ export default defineComponent({
     };
   },
   methods: {
-    signUp() {
+    resetForm() {
+      this.formData.name = "";
+      this.formData.email = "";
+      this.formData.password = "";
+      this.confirmPassword = "";
+    },
+    async signUp() {
       if (this.form !== null) {
         const isFormValid = this.form.validate();
         const confirm = this.formData.password === this.confirmPassword;
         if (isFormValid && confirm) {
-          API.registrationUser(this.formData);
-          this.form.reset();
+          try {
+            await this.$store.dispatch("registration", this.formData);
+            this.form.reset();
+          } catch (error) {
+            console.log("error: ", error);
+          }
         }
       }
     },
