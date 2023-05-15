@@ -4,6 +4,7 @@ import HomePageVue from "@/page/HomePage.vue";
 import RegistrationPage from "@/page/RegistrationPage.vue";
 import LoginPage from "@/page/LoginPage.vue";
 import NotFoundPage from "@/page/NotFoundPage.vue";
+import OrdersPage from "@/page/OrdersPage.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -25,6 +26,11 @@ const routes: Array<RouteRecordRaw> = [
     path: "/registration",
     component: RegistrationPage,
     name: "registration",
+  },
+  {
+    path: "/orders",
+    component: OrdersPage,
+    name: "orders",
   },
   {
     path: "/:pathMatch(.*)*",

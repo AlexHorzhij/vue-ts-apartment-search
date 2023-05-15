@@ -5,15 +5,11 @@
         <router-link :to="{ name: 'homepage' }">
           <Logo />
         </router-link>
-        <div class="authSec">
-          <router-link :to="{ name: 'login' }">
-            <p>Вхід</p>
-          </router-link>
-          <span class="divider"> / </span>
-          <router-link :to="{ name: 'registration' }">
-            <p>Реестрація</p>
-          </router-link>
-        </div>
+        <nav class="header__navigation">
+          <UserBlock v-if="isAuth" />
+          <AuthBlok v-else />
+          <UserMenu />
+        </nav>
       </div>
     </Container>
   </header>
@@ -21,14 +17,24 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import Container from "./reusable/Container.vue";
-import Logo from "./reusable/Logo.vue";
+import Container from "@/components/reusable/Container.vue";
+import Logo from "@/components/reusable/Logo.vue";
+import AuthBlok from "./AuthBlok.vue";
+import UserBlock from "./UserBlock.vue";
+import UserMenu from "./UserMenu.vue";
+import { mapGetters } from "vuex";
 
 export default defineComponent({
   name: "HeaderSection",
   components: {
     Container,
     Logo,
+    AuthBlok,
+    UserBlock,
+    UserMenu,
+  },
+  computed: {
+    ...mapGetters(["isAuth"]),
   },
 });
 </script>
@@ -46,23 +52,8 @@ export default defineComponent({
     display: flex;
     justify-content: space-between;
   }
-}
-
-.authSec {
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-}
-
-a {
-  color: #ffffff;
-
-  &:hover {
-    text-decoration: underline;
+  &__navigation {
+    position: relative;
   }
-}
-
-.divider {
-  padding: 0 4px;
 }
 </style>

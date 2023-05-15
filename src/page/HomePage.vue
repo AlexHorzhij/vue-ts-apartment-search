@@ -41,8 +41,6 @@ export default defineComponent({
     MainApp,
   },
   setup() {
-    // const store = useStore();
-    // console.log("store: ", store);
     return {
       data: data as IApartment[],
     };
@@ -57,9 +55,6 @@ export default defineComponent({
     };
   },
   mounted() {
-    console.log(this.$store);
-
-    console.log("process.env.API_KEY", process.env.API_KEY);
     getApartmentsList();
   },
   methods: {

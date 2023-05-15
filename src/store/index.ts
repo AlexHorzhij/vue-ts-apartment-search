@@ -26,22 +26,29 @@ const initialState = {
 
 export const store = createStore({
   state: { ...initialState },
-  getters: {},
+  getters: {
+    isAuth(state) {
+      return state.user.uid ? true : false;
+    },
+  },
   mutations: {
     setUser(state, payload) {
       state.user = payload;
+    },
+    setIsAuth(state, payload) {
+      state.isAuth = payload;
     },
   },
   actions: {
     async registration({ commit }, payload) {
       const data = await API.registrationUser(payload);
       commit("setUser", data);
-      commit("isAuth", true);
+      commit("setIsAuth", true);
     },
     async login({ commit }, payload) {
       const data = await API.loginUser(payload);
       commit("setUser", data);
-      commit("isAuth", true);
+      commit("setIsAuth", true);
     },
   },
   // modules: {},

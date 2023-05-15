@@ -42,6 +42,7 @@ import Form from "@/components/form/index.vue";
 import InputApp from "@/components/reusable/InputApp.vue";
 import ButtonApp from "@/components/reusable/ButtonApp.vue";
 import AuthTitle from "@/components/auth/AuthTitle.vue";
+import { mapGetters } from "vuex";
 
 export default defineComponent({
   name: "RegistrationForm",
@@ -68,12 +69,6 @@ export default defineComponent({
     };
   },
   methods: {
-    resetForm() {
-      this.formData.name = "";
-      this.formData.email = "";
-      this.formData.password = "";
-      this.confirmPassword = "";
-    },
     async signUp() {
       if (this.form !== null) {
         const isFormValid = this.form.validate();
@@ -81,7 +76,10 @@ export default defineComponent({
         if (isFormValid && confirm) {
           try {
             await this.$store.dispatch("registration", this.formData);
-            this.form.reset();
+            if (this.isAuth) {
+              this.$router.push({ name: "homepage" });
+              this.form.reset();
+            }
           } catch (error) {
             console.log("error: ", error);
           }
@@ -89,7 +87,9 @@ export default defineComponent({
       }
     },
   },
+
   computed: {
+    ...mapGetters(["isAuth"]),
     nameRules() {
       return [notEmpty, symbolsLimit(15)];
     },

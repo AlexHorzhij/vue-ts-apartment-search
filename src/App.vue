@@ -13,7 +13,7 @@
 <script lang="ts">
 import "normalize.css";
 import { defineComponent } from "vue";
-import HeaderSection from "./components/HeaderSection.vue";
+import HeaderSection from "@/components/header/index.vue";
 import FooterSection from "./components/FooterSection.vue";
 
 export default defineComponent({

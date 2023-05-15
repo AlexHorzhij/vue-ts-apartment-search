@@ -31,6 +31,7 @@ import InputApp from "@/components/reusable/InputApp.vue";
 import ButtonApp from "@/components/reusable/ButtonApp.vue";
 import Form from "@/components/form/index.vue";
 import AuthTitle from "@/components/auth/AuthTitle.vue";
+import { mapGetters } from "vuex";
 
 export default defineComponent({
   name: "LoginForm",
@@ -51,6 +52,7 @@ export default defineComponent({
     };
   },
   computed: {
+    ...mapGetters(["isAuth"]),
     emailRules() {
       return [notEmpty, emailValidation];
     },
@@ -59,14 +61,23 @@ export default defineComponent({
     },
   },
   methods: {
-    signIn() {
-      if (this.form !== null) {
-        this.form.submitForm();
-        const isFormValid = this.form.validate();
-        if (isFormValid) {
-          this.$store.dispatch("login", this.formData);
-          this.form.reset();
+    async signIn() {
+      try {
+        if (this.form !== null) {
+          this.form.submitForm();
+          const isFormValid = this.form.validate();
+          if (isFormValid) {
+            await this.$store.dispatch("login", this.formData);
+            if (this.isAuth) {
+              this.$router.push({ name: "homepage" });
+              this.form.reset();
+            }
+          }
         }
+      } catch (error) {
+        console.log("error: ", error);
+      } finally {
+        console.log("isAuth", this.isAuth);
       }
     },
   },
