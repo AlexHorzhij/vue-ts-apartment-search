@@ -4,6 +4,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   updateProfile,
+  signOut,
 } from "firebase/auth";
 // import { store } from "@/store/index";
 // import {IResponse} from '@/types/data'
@@ -59,6 +60,13 @@ export default {
         uid: user.uid,
       };
       return data;
+    } catch (error) {
+      console.log("error: ", error);
+    }
+  },
+  async logout() {
+    try {
+      await signOut(auth);
     } catch (error) {
       console.log("error: ", error);
     }

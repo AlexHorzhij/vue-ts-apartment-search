@@ -5,7 +5,7 @@
     </li>
     <li class="menu__item-button">
       <router-link :to="{ name: 'orders' }">
-        <button class="button">exit</button>
+        <button class="button" @click="$emit('logout')">exit</button>
       </router-link>
     </li>
   </ul>
@@ -23,7 +23,8 @@ export default defineComponent({
 @import "@/assets/scss/variables.scss";
 .menu {
   position: absolute;
-  top: 20px;
+  top: 28px;
+  right: 0;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -43,9 +44,12 @@ export default defineComponent({
   }
   &__item-button {
     flex-grow: 1;
+    width: 100%;
   }
   .button {
     width: 100%;
+    font-weight: 700;
+
     background-color: transparent;
     border: none;
     width: 100%;

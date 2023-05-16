@@ -1,4 +1,5 @@
 import { createStore, Store } from "vuex";
+import VuexPersistence from "vuex-persist";
 import API from "@/api/auth";
 
 declare module "@vue/runtime-core" {
@@ -30,6 +31,9 @@ export const store = createStore({
     isAuth(state) {
       return state.user.uid ? true : false;
     },
+    user(state) {
+      return state.user;
+    },
   },
   mutations: {
     setUser(state, payload) {
@@ -37,6 +41,10 @@ export const store = createStore({
     },
     setIsAuth(state, payload) {
       state.isAuth = payload;
+    },
+    setInitialState(state) {
+      state.isAuth = initialState.isAuth;
+      state.user = initialState.user;
     },
   },
   actions: {
@@ -50,6 +58,15 @@ export const store = createStore({
       commit("setUser", data);
       commit("setIsAuth", true);
     },
+    async logout({ commit }) {
+      await API.logout();
+      commit("setInitialState");
+    },
   },
+  plugins: [
+    new VuexPersistence({
+      storage: window.localStorage,
+    }).plugin,
+  ],
   // modules: {},
 });

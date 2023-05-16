@@ -5,10 +5,18 @@
         <router-link :to="{ name: 'homepage' }">
           <Logo />
         </router-link>
-        <nav class="header__navigation">
-          <UserBlock v-if="isAuth" />
+        <nav
+          class="header__navigation"
+          @mouseover="openMenu"
+          @mouseleave="closeMenu"
+        >
+          <UserBlock v-if="isAuth" @click="toggleHideMenu" />
           <AuthBlok v-else />
-          <UserMenu />
+          <UserMenu
+            v-show="!isHiddenMenu"
+            :close="closeMenu"
+            @logout="logout"
+          />
         </nav>
       </div>
     </Container>
@@ -33,6 +41,33 @@ export default defineComponent({
     UserBlock,
     UserMenu,
   },
+  data() {
+    return {
+      isHiddenMenu: true,
+    };
+  },
+  methods: {
+    openMenu() {
+      if (this.isAuth) {
+        this.isHiddenMenu = false;
+      }
+    },
+    closeMenu() {
+      this.isHiddenMenu = true;
+    },
+    toggleHideMenu() {
+      this.isHiddenMenu = !this.isHiddenMenu;
+    },
+    async logout() {
+      try {
+        await this.$store.dispatch("logout");
+        this.closeMenu();
+        this.$router.push({ name: "login" });
+      } catch (error) {
+        console.log("error: ", error);
+      }
+    },
+  },
   computed: {
     ...mapGetters(["isAuth"]),
   },
@@ -51,9 +86,14 @@ export default defineComponent({
   &__content {
     display: flex;
     justify-content: space-between;
+    align-items: center;
   }
   &__navigation {
+    height: 100%;
     position: relative;
+    display: flex;
+    align-items: center;
+    padding-left: 30px;
   }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="menu">
+  <button class="menu">
     <span>menu</span>
     <svg
       class="menu__image"
@@ -16,7 +16,7 @@
         d="M16.8216 14.0161C15.4028 11.8877 13.0282 10.6172 10.4708 10.6172H7.5292C4.9718 10.6172 2.5972 11.8877 1.17844 14.0161L1.08984 14.1489V18H16.9102H16.9102V14.1489L16.8216 14.0161Z"
       />
     </svg>
-  </div>
+  </button>
 </template>
 
 <script lang="ts">
@@ -30,10 +30,14 @@ export default defineComponent({
 <style scoped lang="scss">
 @import "@/assets/scss/variables.scss";
 .menu {
+  height: 28px;
   color: $main-background;
+  background-color: transparent;
+  border: none;
   display: flex;
   align-items: center;
   fill: $main-background;
+  cursor: pointer;
 
   &__image {
     fill: inherit;

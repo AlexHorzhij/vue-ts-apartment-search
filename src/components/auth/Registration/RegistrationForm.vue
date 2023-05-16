@@ -24,7 +24,10 @@
         :validationRules="confirmPasswordRules"
       />
     </div>
-    <ButtonApp type="submit">Sign up</ButtonApp>
+    <ButtonApp type="submit" class="form__btn">
+      <CircleLoader v-if="isLoading" width="40" height="40" />
+      <span v-else> Sign up</span>
+    </ButtonApp>
   </Form>
 </template>
 
@@ -42,6 +45,7 @@ import Form from "@/components/form/index.vue";
 import InputApp from "@/components/reusable/InputApp.vue";
 import ButtonApp from "@/components/reusable/ButtonApp.vue";
 import AuthTitle from "@/components/auth/AuthTitle.vue";
+import CircleLoader from "@/components/reusable/loader/CircleLoader.vue";
 import { mapGetters } from "vuex";
 
 export default defineComponent({
@@ -51,6 +55,7 @@ export default defineComponent({
     ButtonApp,
     Form,
     AuthTitle,
+    CircleLoader,
   },
   setup() {
     const form = ref<HTMLFormElement | null>(null);
@@ -60,6 +65,7 @@ export default defineComponent({
   },
   data() {
     return {
+      isLoading: false,
       formData: {
         name: "",
         email: "",
@@ -69,10 +75,14 @@ export default defineComponent({
     };
   },
   methods: {
+    toggleLoader() {
+      this.isLoading = !this.isLoading;
+    },
     async signUp() {
       if (this.form !== null) {
         const isFormValid = this.form.validate();
         const confirm = this.formData.password === this.confirmPassword;
+        this.toggleLoader();
         if (isFormValid && confirm) {
           try {
             await this.$store.dispatch("registration", this.formData);
@@ -82,6 +92,8 @@ export default defineComponent({
             }
           } catch (error) {
             console.log("error: ", error);
+          } finally {
+            this.toggleLoader();
           }
         }
       }
@@ -109,10 +121,15 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-.form__inputs {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  margin-bottom: 60px;
+.form {
+  &__inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 60px;
+  }
+  &__btn {
+    width: 100%;
+  }
 }
 </style>

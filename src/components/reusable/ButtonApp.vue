@@ -7,7 +7,10 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
-export default defineComponent({});
+export default defineComponent({
+  name: "ButtonApp",
+  components: {},
+});
 </script>
 
 <style scoped lang="scss">
