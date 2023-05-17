@@ -36,7 +36,7 @@ import Form from "@/components/form/index.vue";
 import AuthTitle from "@/components/auth/AuthTitle.vue";
 import CircleLoader from "@/components/reusable/loader/CircleLoader.vue";
 
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default defineComponent({
   name: "LoginForm",
@@ -57,7 +57,7 @@ export default defineComponent({
     };
   },
   computed: {
-    ...mapGetters(["isAuth"]),
+    ...mapGetters("auth", ["isAuth"]),
     emailRules() {
       return [notEmpty, emailValidation];
     },
@@ -66,6 +66,7 @@ export default defineComponent({
     },
   },
   methods: {
+    ...mapActions("auth", ["login"]),
     toggleLoader() {
       this.isLoading = !this.isLoading;
     },
@@ -76,7 +77,7 @@ export default defineComponent({
           const isFormValid = this.form.validate();
           this.toggleLoader();
           if (isFormValid) {
-            await this.$store.dispatch("login", this.formData);
+            await this.login(this.formData);
             if (this.isAuth) {
               this.$router.push({ name: "homepage" });
               this.form.reset();
@@ -89,6 +90,9 @@ export default defineComponent({
         this.toggleLoader();
       }
     },
+  },
+  mounted() {
+    console.log(this.isAuth);
   },
 });
 </script>

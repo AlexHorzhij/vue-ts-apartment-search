@@ -22,7 +22,7 @@ export default defineComponent({
     FooterSection,
   },
   mounted() {
-    console.log(this.$store.state.user);
+    console.log(this.$store.state.auth.user);
   },
 });
 </script>
@@ -38,6 +38,6 @@ export default defineComponent({
   color: #2c3e50;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 100vh;
 }
 </style>

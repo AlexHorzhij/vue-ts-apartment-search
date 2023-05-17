@@ -28,7 +28,7 @@ import Container from "@/components/reusable/Container.vue";
 import ApartmentItemList from "@/components/HomePage/ApartmentItemList.vue";
 import ApartmentItem from "@/components/HomePage/ApartmentItem.vue";
 import ApartmentFindForm from "@/components/HomePage/ApartmentFindForm.vue";
-import { getApartmentsList } from "@/api/apartment";
+// import { getApartmentsList } from "@/api/apartment";
 // import { useStore } from "@/store/index";
 import data from "@/assets/data";
 
@@ -54,9 +54,9 @@ export default defineComponent({
       } as ISearchQuery,
     };
   },
-  mounted() {
-    getApartmentsList();
-  },
+  // mounted() {
+  //   getApartmentsList();
+  // },
   methods: {
     findApartment(data: ISearchQuery): void {
       this.filterParams = data;

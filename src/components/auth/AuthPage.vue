@@ -18,6 +18,7 @@ export default defineComponent({
 .auth {
   position: relative;
   display: flex;
+  height: 100%;
   flex-grow: 1;
   justify-content: center;
   align-items: center;

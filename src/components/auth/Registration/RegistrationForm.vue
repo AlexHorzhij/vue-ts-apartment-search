@@ -33,7 +33,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-import { IFormData } from "@/types/data";
+import { ISingUp } from "@/types/data";
 import {
   passwordConfirmValidation,
   passwordValidation,
@@ -46,7 +46,7 @@ import InputApp from "@/components/reusable/InputApp.vue";
 import ButtonApp from "@/components/reusable/ButtonApp.vue";
 import AuthTitle from "@/components/auth/AuthTitle.vue";
 import CircleLoader from "@/components/reusable/loader/CircleLoader.vue";
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 export default defineComponent({
   name: "RegistrationForm",
@@ -70,11 +70,12 @@ export default defineComponent({
         name: "",
         email: "",
         password: "",
-      } as IFormData,
+      } as ISingUp,
       confirmPassword: "",
     };
   },
   methods: {
+    ...mapActions("auth", ["registration"]),
     toggleLoader() {
       this.isLoading = !this.isLoading;
     },
@@ -85,7 +86,7 @@ export default defineComponent({
         this.toggleLoader();
         if (isFormValid && confirm) {
           try {
-            await this.$store.dispatch("registration", this.formData);
+            await this.registration(this.formData);
             if (this.isAuth) {
               this.$router.push({ name: "homepage" });
               this.form.reset();
@@ -101,7 +102,7 @@ export default defineComponent({
   },
 
   computed: {
-    ...mapGetters(["isAuth"]),
+    ...mapGetters("auth", ["isAuth"]),
     nameRules() {
       return [notEmpty, symbolsLimit(15)];
     },

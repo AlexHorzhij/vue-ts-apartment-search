@@ -15,7 +15,7 @@
           <UserMenu
             v-show="!isHiddenMenu"
             :close="closeMenu"
-            @logout="logout"
+            @logout="signOut"
           />
         </nav>
       </div>
@@ -30,7 +30,7 @@ import Logo from "@/components/reusable/Logo.vue";
 import AuthBlok from "./AuthBlok.vue";
 import UserBlock from "./UserBlock.vue";
 import UserMenu from "./UserMenu.vue";
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 export default defineComponent({
   name: "HeaderSection",
@@ -47,6 +47,7 @@ export default defineComponent({
     };
   },
   methods: {
+    ...mapActions("auth", ["logout"]),
     openMenu() {
       if (this.isAuth) {
         this.isHiddenMenu = false;
@@ -58,9 +59,9 @@ export default defineComponent({
     toggleHideMenu() {
       this.isHiddenMenu = !this.isHiddenMenu;
     },
-    async logout() {
+    async signOut() {
       try {
-        await this.$store.dispatch("logout");
+        await this.logout();
         this.closeMenu();
         this.$router.push({ name: "login" });
       } catch (error) {
@@ -69,7 +70,7 @@ export default defineComponent({
     },
   },
   computed: {
-    ...mapGetters(["isAuth"]),
+    ...mapGetters("auth", ["isAuth"]),
   },
 });
 </script>

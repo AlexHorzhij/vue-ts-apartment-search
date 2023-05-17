@@ -15,7 +15,7 @@ export default defineComponent({
 <style scoped>
 .main {
   display: flex;
-  height: 100%;
+  flex-grow: 1;
   width: 100%;
   padding-top: 60px;
 }
