@@ -26,7 +26,7 @@ import API from "@/api/apartment";
 export default defineComponent({
   name: "myOrders",
   components: { MainTitle, MyOrderCard },
-  data() {
+  data: () => {
     return {
       ordersList: [] as string[],
     };

@@ -1,4 +1,5 @@
 import { Store } from "@/vuex";
+import { ComponentCustomProperties } from "vue";
 
 declare module "@vue/runtime-core" {
   interface State {
@@ -13,3 +14,11 @@ declare module "@vue/runtime-core" {
     $store: Store<State>;
   }
 }
+
+// import { Store } from "vuex";
+
+// declare module "@vue/runtime-core" {
+//   interface ComponentCustomProperties {
+//     $store: Store<State>;
+//   }
+// }

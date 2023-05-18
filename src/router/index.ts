@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-import ApartmentPage from "@/page/ApartmentPage.vue";
-import HomePageVue from "@/page/HomePage.vue";
-import RegistrationPage from "@/page/RegistrationPage.vue";
-import LoginPage from "@/page/LoginPage.vue";
-import NotFoundPage from "@/page/NotFoundPage.vue";
-import OrdersPage from "@/page/OrdersPage.vue";
+const ApartmentPage = () => import("@/page/ApartmentPage.vue");
+const HomePageVue = () => import("@/page/HomePage.vue");
+const RegistrationPage = () => import("@/page/RegistrationPage.vue");
+const LoginPage = () => import("@/page/LoginPage.vue");
+const NotFoundPage = () => import("@/page/NotFoundPage.vue");
+const OrdersPage = () => import("@/page/OrdersPage.vue");
 import { store } from "@/store/index";
 
 const routes: Array<RouteRecordRaw> = [
