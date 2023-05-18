@@ -16,6 +16,7 @@
     "dotenv": "^16.0.3",
     "firebase": "^9.21.0",
     "normalize.css": "^8.0.1",
+    "travis": "^0.1.1",
     "vue": "^3.2.13",
     "vue-router": "^4.1.6",
     "vuex": "^4.1.0",
