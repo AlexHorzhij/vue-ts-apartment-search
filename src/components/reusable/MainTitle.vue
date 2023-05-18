@@ -8,7 +8,7 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "AuthTitle",
+  name: "MainTitle",
   props: {
     level: { type: Number, default: 1 },
   },

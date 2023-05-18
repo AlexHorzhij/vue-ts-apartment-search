@@ -1,21 +1,13 @@
-import { app } from "@/utils/firebaseConfig";
+import { db, auth } from "@/utils/firebaseConfig";
+
 import {
-  getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   updateProfile,
   signOut,
 } from "firebase/auth";
-// import { store } from "@/store/index";
+import { doc, setDoc } from "firebase/firestore";
 import { IResponse, ISingUp, ISingIn } from "@/types/data";
-
-export const auth = getAuth(app);
-
-// interface IResponse {
-//   userName: string | null;
-//   email: string | null;
-//   uid: string | null;
-// }
 
 export default {
   async registrationUser({ email, password, name }: ISingUp) {
@@ -25,6 +17,9 @@ export default {
       if (user !== null) {
         await updateProfile(user, {
           displayName: name,
+        });
+        await setDoc(doc(db, "users", user.uid), {
+          reserved: [],
         });
       }
       const response = auth.currentUser;

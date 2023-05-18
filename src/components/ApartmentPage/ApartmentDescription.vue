@@ -6,7 +6,15 @@
     </div>
     <img class="apartment__image" :src="imgUrl" alt="apartment image" />
     <p class="apartment__description">{{ description }}</p>
-    <ButtonApp class="apartment__btn" @click="reserve">Reserve</ButtonApp>
+    <ButtonApp
+      class="apartment__btn"
+      @click="reserve"
+      :outlined="isReserved"
+      :is-loading="isLoading"
+    >
+      <span v-if="isReserved">Reserved</span>
+      <span v-else>Reserve</span>
+    </ButtonApp>
   </div>
 </template>
 
@@ -26,6 +34,15 @@ export default defineComponent({
   data() {
     return {
       id: this.$route.params.id,
+      isReserved: false,
+      isLoading: false,
+      // card: {
+      //   imgUrl: this.imgUrl,
+      //   description: this.description,
+      //   rating: this.rating,
+      //   price: this.price,
+      //   title: this.title,
+      // },
     };
   },
   props: {
@@ -52,29 +69,35 @@ export default defineComponent({
   },
   computed: {
     ...mapState("auth", ["user"]),
-    // idApartm() {
-    //   if ((this.$route.params.id = typeof "string")) {
-    //     console.log("this.$route.params.id: ", this.$route.params.id);
-    //     return this.$route.params.id;
-    //   }
-    //   return "";
-    // },
   },
   methods: {
     async reserve() {
-      // await API.getReserve();
-      console.log(this.id);
-      console.log("this.$route.params.id", this.$route.params.id);
-      const id = this.$route.params.id;
-
-      const data = await API.reserveApartment("this.$route.params.id");
-      console.log("data: ", data);
+      try {
+        this.isLoading = true;
+        let apId = "";
+        if (typeof this.$route.params.id === "string") {
+          apId = this.$route.params.id;
+        }
+        const userId = this.user.uid;
+        if (!this.isReserved) {
+          await API.reserveApartment(apId, userId);
+          this.isReserved = true;
+        } else {
+          await API.unReserveApartment(apId, userId);
+          this.isReserved = false;
+        }
+      } catch (error) {
+        console.log("error: ", error);
+      } finally {
+        this.isLoading = false;
+      }
     },
   },
 });
 </script>
 
 <style scoped lang="scss">
+@import "@/assets/scss/variables.scss";
 .apartment {
   width: 730px;
   display: flex;
@@ -99,6 +122,7 @@ export default defineComponent({
     align-self: center;
   }
 }
+
 .apartment-title {
   font-weight: 700;
   font-size: 20px;

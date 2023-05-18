@@ -1,6 +1,6 @@
 <template>
   <Form ref="form" @submit.prevent="signUp">
-    <AuthTitle>Registration</AuthTitle>
+    <MainTitle>Registration</MainTitle>
 
     <div class="form__inputs">
       <InputApp
@@ -24,9 +24,8 @@
         :validationRules="confirmPasswordRules"
       />
     </div>
-    <ButtonApp type="submit" class="form__btn">
-      <CircleLoader v-if="isLoading" width="40" height="40" />
-      <span v-else> Sign up</span>
+    <ButtonApp type="submit" class="form__btn" :isLoading="isLoading">
+      Sign up
     </ButtonApp>
   </Form>
 </template>
@@ -44,8 +43,7 @@ import {
 import Form from "@/components/form/index.vue";
 import InputApp from "@/components/reusable/InputApp.vue";
 import ButtonApp from "@/components/reusable/ButtonApp.vue";
-import AuthTitle from "@/components/auth/AuthTitle.vue";
-import CircleLoader from "@/components/reusable/loader/CircleLoader.vue";
+import MainTitle from "@/components/reusable/MainTitle.vue";
 import { mapActions, mapGetters } from "vuex";
 
 export default defineComponent({
@@ -54,8 +52,7 @@ export default defineComponent({
     InputApp,
     ButtonApp,
     Form,
-    AuthTitle,
-    CircleLoader,
+    MainTitle,
   },
   setup() {
     const form = ref<HTMLFormElement | null>(null);

@@ -42,6 +42,10 @@ export default {
   stroke-dasharray: 0 250;
   animation: preloader 4s infinite;
 }
+.circle-loader {
+  display: flex;
+  align-items: center;
+}
 
 @keyframes preloader {
   0% {

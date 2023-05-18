@@ -1,6 +1,6 @@
 <template>
   <Form ref="form" @submit.prevent="signIn">
-    <AuthTitle>Login</AuthTitle>
+    <MainTitle>Login</MainTitle>
     <div class="form__inputs">
       <InputApp
         placeholder="Email"
@@ -15,9 +15,8 @@
         :validationRules="passwordRules"
       />
     </div>
-    <ButtonApp type="submit" class="form__btn">
-      <CircleLoader v-if="isLoading" width="40" height="40" />
-      <span v-else> Sign in</span>
+    <ButtonApp type="submit" class="form__btn" :isLoading="isLoading">
+      Sign in
     </ButtonApp>
   </Form>
 </template>
@@ -33,14 +32,13 @@ import {
 import InputApp from "@/components/reusable/InputApp.vue";
 import ButtonApp from "@/components/reusable/ButtonApp.vue";
 import Form from "@/components/form/index.vue";
-import AuthTitle from "@/components/auth/AuthTitle.vue";
-import CircleLoader from "@/components/reusable/loader/CircleLoader.vue";
+import MainTitle from "@/components/reusable/MainTitle.vue";
 
 import { mapGetters, mapActions } from "vuex";
 
 export default defineComponent({
   name: "LoginForm",
-  components: { InputApp, ButtonApp, Form, AuthTitle, CircleLoader },
+  components: { InputApp, ButtonApp, Form, MainTitle },
   setup() {
     const form = ref<HTMLFormElement | null>(null);
     return {

@@ -1,49 +1,53 @@
-// import axios from "../utils/axios";
-import { db, auth } from "@/utils/firebaseConfig";
+import { db } from "@/utils/firebaseConfig";
 
 import {
-  addDoc,
   getDocs,
   collection,
   doc,
   updateDoc,
+  arrayUnion,
+  arrayRemove,
 } from "firebase/firestore";
 
-// export const getApartmentsList = async () => {
-//   const data = await axios.get("/apartments");
-//   console.log("data: ", data);
-//   return data;
-// };
-
-// export const getApartmentById = (id: string) => {
-//   return axios.get(`/apartments/${id}`);
-// };
+interface IRes {
+  reserved: string[] | [];
+}
 
 export default {
-  async reserveApartment(id: string) {
-    console.log("id: ", id);
-    const reserveRef = doc(db, "users", id);
+  async reserveApartment(apId: string, userId: string) {
+    const reserveRef = doc(db, "users", userId);
     try {
-      // const docRef = await addDoc(collection(db, "users", id), {
-      //  reserved: [],
-      // });
-      const docRef = await updateDoc(reserveRef, { reserved: id });
-      console.log("Document written with ID: ", docRef);
+      const docRef = await updateDoc(reserveRef, {
+        reserved: arrayUnion(apId),
+      });
       return docRef;
     } catch (e) {
       console.error("Error adding document: ", e);
     }
   },
-  async getReserve() {
+  async unReserveApartment(apId: string, userId: string) {
+    const reserveRef = doc(db, "users", userId);
+    try {
+      const docRef = await updateDoc(reserveRef, {
+        reserved: arrayRemove(apId),
+      });
+      return docRef;
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+  },
+  async getReserve(id: string) {
     try {
       const querySnapshot = await getDocs(collection(db, "users"));
-      console.log("querySnapshot: ", querySnapshot);
+      let data = { reserved: [] } as IRes;
       querySnapshot.forEach(doc => {
-        console.log(`${doc.id} => ${doc.data()}`);
+        if (doc.id === id) {
+          data = [doc.data() as IRes][0];
+        }
       });
+      return data;
     } catch (error) {
       console.log("error: ", error);
     }
   },
 };
-// await addDoc(collection(db, "posts"), data);
