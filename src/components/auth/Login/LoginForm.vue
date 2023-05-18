@@ -8,12 +8,18 @@
         messageError="Enter your email"
         :validationRules="emailRules"
       />
-      <InputApp
-        placeholder="Password"
-        v-model:value="formData.password"
-        messageError="Wrong password"
-        :validationRules="passwordRules"
-      />
+      <ShowPasswordButton
+        :hidePassword="hidePassword"
+        @showPasswordToggle="showPasswordToggle"
+      >
+        <InputApp
+          placeholder="Password"
+          v-model:value="formData.password"
+          messageError="Wrong password"
+          :validationRules="passwordRules"
+          :type="hidePassword ? 'password' : 'text'"
+        />
+      </ShowPasswordButton>
     </div>
     <ButtonApp type="submit" class="form__btn" :isLoading="isLoading">
       Sign in
@@ -33,12 +39,13 @@ import InputApp from "@/components/reusable/InputApp.vue";
 import ButtonApp from "@/components/reusable/ButtonApp.vue";
 import Form from "@/components/form/index.vue";
 import MainTitle from "@/components/reusable/MainTitle.vue";
+import ShowPasswordButton from "@/components/reusable/ShowPasswordButton.vue";
 
 import { mapGetters, mapActions } from "vuex";
 
 export default defineComponent({
   name: "LoginForm",
-  components: { InputApp, ButtonApp, Form, MainTitle },
+  components: { InputApp, ButtonApp, Form, MainTitle, ShowPasswordButton },
   setup() {
     const form = ref<HTMLFormElement | null>(null);
     return {
@@ -47,6 +54,7 @@ export default defineComponent({
   },
   data() {
     return {
+      hidePassword: true,
       isLoading: false,
       formData: {
         email: "",
@@ -67,6 +75,9 @@ export default defineComponent({
     ...mapActions("auth", ["login"]),
     toggleLoader() {
       this.isLoading = !this.isLoading;
+    },
+    showPasswordToggle() {
+      this.hidePassword = !this.hidePassword;
     },
     async signIn() {
       try {
@@ -89,13 +100,11 @@ export default defineComponent({
       }
     },
   },
-  mounted() {
-    console.log(this.isAuth);
-  },
 });
 </script>
 
 <style scoped lang="scss">
+@import "@/assets/scss/variables.scss";
 .form {
   &__inputs {
     display: flex;

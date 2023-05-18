@@ -21,9 +21,6 @@ export default defineComponent({
     HeaderSection,
     FooterSection,
   },
-  mounted() {
-    console.log(this.$store.state.auth.user);
-  },
 });
 </script>
 

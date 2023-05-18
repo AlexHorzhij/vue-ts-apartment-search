@@ -13,16 +13,28 @@
         v-model:value="formData.email"
         :validationRules="emailRules"
       />
-      <InputApp
-        placeholder="Password"
-        v-model:value="formData.password"
-        :validationRules="passwordRules"
-      />
-      <InputApp
-        placeholder="Confirm password"
-        v-model:value="confirmPassword"
-        :validationRules="confirmPasswordRules"
-      />
+      <ShowPasswordButton
+        :hidePassword="hidePassword"
+        @showPasswordToggle="showPasswordToggle"
+      >
+        <InputApp
+          placeholder="Password"
+          v-model:value="formData.password"
+          :validationRules="passwordRules"
+          :type="hidePassword ? 'password' : 'text'"
+        />
+      </ShowPasswordButton>
+      <ShowPasswordButton
+        :hidePassword="hideConfirmPassword"
+        @showPasswordToggle="showConfirmPasswordToggle"
+      >
+        <InputApp
+          placeholder="Confirm password"
+          v-model:value="confirmPassword"
+          :validationRules="confirmPasswordRules"
+          :type="hideConfirmPassword ? 'password' : 'text'"
+        />
+      </ShowPasswordButton>
     </div>
     <ButtonApp type="submit" class="form__btn" :isLoading="isLoading">
       Sign up
@@ -44,6 +56,7 @@ import Form from "@/components/form/index.vue";
 import InputApp from "@/components/reusable/InputApp.vue";
 import ButtonApp from "@/components/reusable/ButtonApp.vue";
 import MainTitle from "@/components/reusable/MainTitle.vue";
+import ShowPasswordButton from "@/components/reusable/ShowPasswordButton.vue";
 import { mapActions, mapGetters } from "vuex";
 
 export default defineComponent({
@@ -53,6 +66,7 @@ export default defineComponent({
     ButtonApp,
     Form,
     MainTitle,
+    ShowPasswordButton,
   },
   setup() {
     const form = ref<HTMLFormElement | null>(null);
@@ -62,6 +76,8 @@ export default defineComponent({
   },
   data() {
     return {
+      hidePassword: true,
+      hideConfirmPassword: true,
       isLoading: false,
       formData: {
         name: "",
@@ -75,6 +91,12 @@ export default defineComponent({
     ...mapActions("auth", ["registration"]),
     toggleLoader() {
       this.isLoading = !this.isLoading;
+    },
+    showPasswordToggle() {
+      this.hidePassword = !this.hidePassword;
+    },
+    showConfirmPasswordToggle() {
+      this.hideConfirmPassword = !this.hideConfirmPassword;
     },
     async signUp() {
       if (this.form !== null) {

@@ -1,7 +1,8 @@
 <template>
   <div class="orders__wrapper">
     <MainTitle class="title">Orders</MainTitle>
-    <div class="orders__container">
+    <p v-if="ordersCount === 0">There are not orders now.</p>
+    <div v-else class="orders__list">
       <MyOrderCard
         v-for="order in orderedApartmentData"
         :key="order.id"
@@ -35,8 +36,11 @@ export default defineComponent({
       const data = apartments.filter(item => this.ordersList.includes(item.id));
       return data;
     },
+    ordersCount() {
+      return this.orderedApartmentData.length;
+    },
   },
-  async mounted() {
+  async created() {
     const orders = await API.getReserve(this.$store.state.auth.user.uid);
     if (orders) {
       this.ordersList = orders.reserved;
@@ -52,7 +56,7 @@ export default defineComponent({
     padding-top: 60px;
     margin: 0 auto;
   }
-  &__container {
+  &__list {
     display: flex;
     flex-direction: column;
     gap: 20px;

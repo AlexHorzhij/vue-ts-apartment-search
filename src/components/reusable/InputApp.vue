@@ -108,6 +108,10 @@ export default defineComponent({
   color: $error-color;
 }
 
+/* .show-btn{
+  width: 44px;
+} */
+
 .error {
   border: 1px solid $error-color;
 }
