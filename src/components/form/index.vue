@@ -52,7 +52,7 @@ export default defineComponent({
 .form {
   padding: 40px 30px;
   background-color: $main-background;
-  width: 410px;
+  /* width: 410px; */
   z-index: 100;
 }
 </style>
