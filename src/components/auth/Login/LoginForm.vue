@@ -106,6 +106,7 @@ export default defineComponent({
 <style scoped lang="scss">
 @import "@/assets/scss/variables.scss";
 .form {
+  width: 410px;
   &__inputs {
     display: flex;
     flex-direction: column;

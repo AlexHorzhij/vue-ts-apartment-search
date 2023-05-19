@@ -2,7 +2,7 @@ export default [
   {
     id: "5f689a2c09b16000e9a2f47b",
     title: "Delectus et iste.",
-    imgUrl: "@/assets/image/apartment-1.jpg",
+    imgUrl: "./img/apartments/apartment-1.jpg",
     descr:
       "Debitis similique unde et eligendi sapiente in iure blanditiis distinctio. Cum nihil temporibus qui quam aut. Nesciunt qui eveniet eum quam voluptate numquam.",
     rating: 3,
@@ -19,7 +19,7 @@ export default [
   {
     id: "5f689a2c09b16000e9a2f47d",
     title: "Eaque suscipit incidunt.",
-    imgUrl: "@/assets/image/apartment-2.jpg",
+    imgUrl: "/img/apartments/apartment-2.jpg",
     descr:
       "Hic dolorem ab est hic iusto sed fugiat id aut. Eum reprehenderit eius odit perspiciatis illo. Odit repellat praesentium. Ea consequatur vero sed pariatur dolores omnis. Sed omnis vel atque sapiente natus voluptas dolores. Magnam enim consequuntur iure cupiditate voluptatem rerum.",
     rating: 3,
